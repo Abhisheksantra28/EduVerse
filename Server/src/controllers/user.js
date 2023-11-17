@@ -12,7 +12,12 @@ export const createUser = asyncHander(async (req, res, next) => {
     });
   }
 
-  const newUser = await User.create({ username, email, phone, password });
+  const newUser = await User.create({
+    username,
+    email,
+    phone,
+    password,
+  });
   res.status(201).json({
     success: true,
     message: "User Registered Successfully !!",
