@@ -42,6 +42,10 @@ userSchema.pre("save", async function (next) {
   }
 });
 
+userSchema.methods.isMatch = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
 //json web token
 userSchema.methods.generateToken = async function () {
   try {
@@ -61,7 +65,6 @@ userSchema.methods.generateToken = async function () {
     );
   } catch (error) {
     console.error("jwt error:", error);
-    
   }
 };
 
