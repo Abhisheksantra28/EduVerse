@@ -21,5 +21,7 @@ export const createUser = asyncHander(async (req, res, next) => {
   res.status(201).json({
     success: true,
     message: "User Registered Successfully !!",
+    token: await newUser.generateToken(),
+    userId: newUser._id,
   });
 });
