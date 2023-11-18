@@ -43,7 +43,11 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.isMatch = async function (password) {
-  return await bcrypt.compare(password, this.password);
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    next(error);
+  }
 };
 
 //json web token
