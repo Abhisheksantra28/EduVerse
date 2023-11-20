@@ -51,8 +51,8 @@ userSchema.methods.isMatch = async function (password) {
 };
 
 //json web token
-userSchema.methods.generateToken = async function () {
-  try {
+userSchema.methods.generateToken = function () {
+ 
     return jwt.sign(
       {
         _id: this._id,
@@ -67,9 +67,7 @@ userSchema.methods.generateToken = async function () {
         expiresIn: process.env.JWT_EXPIRES,
       }
     );
-  } catch (error) {
-    console.error("jwt error:", error);
-  }
+
 };
 
 export const User = new mongoose.model("User", userSchema);

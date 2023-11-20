@@ -54,5 +54,3 @@ export const userLogin = asyncHander(async (req, res, next) => {
     });
   }
 });
-
-
