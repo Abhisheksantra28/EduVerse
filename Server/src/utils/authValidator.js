@@ -29,3 +29,22 @@ export const signupSchema = zod.object({
       message: "password should not be greater than 1024 characters!",
     }),
 });
+
+
+export const userLoginSchema = zod.object({
+  email: zod
+    .string({ required_error: "Email is required" })
+    .trim()
+    .email({ message: "Invalid email address" })
+    .min(3, { message: "Email must be at least 3 characters!" })
+    .max(255, { message: "Email must not be more than 255 characters!" }),
+
+  password: zod
+    .string({ required_error: "Password is required" })
+    .min(6, { message: "Password must be at least 6 characters!" })
+    .max(1024, {
+      message: "Password should not be greater than 1024 characters!",
+    }),
+});
+
+
