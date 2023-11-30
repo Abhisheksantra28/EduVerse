@@ -1,6 +1,6 @@
 import { asyncHander } from "../utils/asyncHandler.js";
 import { User } from "../models/user.model.js";
-import ErrorHandler from "../middlewares/error.middleware.js";
+import ErrorHandler from "../utils/errorHandler.js";
 
 export const createUser = asyncHander(async (req, res, next) => {
   const { username, email, phone, password } = req.body;
@@ -37,12 +37,13 @@ export const userLogin = asyncHander(async (req, res, next) => {
     //   success: false,
     //   message: "Invalid Credentials",
     // });
-    return next(new ErrorHandler("Invalid Credentials!",400))
+    throw new ErrorHandler("Invalid Credentials!", 400);
   }
 
   // const isMatch = await bcrypt.compare(password, user.password);
+  const correctPassword = await user.isMatch(password);
 
-  if (user.isMatch(password)) {
+  if (correctPassword) {
     res.status(200).json({
       success: true,
       message: "Login Successful",
@@ -55,6 +56,7 @@ export const userLogin = asyncHander(async (req, res, next) => {
     //   message: "Invalid email or password!",
     // });
 
-    next(new ErrorHandler("Invalid email or password!", 401));
+    throw new ErrorHandler("Invalid email or password!", 401);
+    
   }
 });

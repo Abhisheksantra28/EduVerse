@@ -1,6 +1,6 @@
 import express from "express";
 import userRouter from "./routes/user.js";
-import { errorMiddleware } from "./middlewares/error.middleware.js";
+import { errorMiddleware } from "./utils/errorHandler.js";
 
 
 const app = express();
@@ -9,8 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// using middlewares
-app.use(errorMiddleware)
+
 
 
 
