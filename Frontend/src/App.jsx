@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { About, Contact, Home, Login, Register, Service } from "./pages";
-import { Navbar } from "./components";
+import { Footer, Navbar } from "./components";
 
 const App = () => {
   return (
@@ -15,6 +15,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <Footer />
     </Router>
   );
 };
